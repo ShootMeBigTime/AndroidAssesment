@@ -32,8 +32,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
         Pokemon pokemon = Pokemon.get(position);
 
-        holder.img.setImageResource(pokemon.id);
-        holder.text.setText(pokemon.name);
+        //holder.img.setImageResource(pokemon.id);
+        holder.name.setText(pokemon.name);
+        holder.type.setText(pokemon.type);
+        holder.discription.setText(pokemon.discription);
     }
 
     @Override
