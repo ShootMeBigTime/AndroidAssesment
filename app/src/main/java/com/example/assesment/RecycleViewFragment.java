@@ -37,6 +37,6 @@ public class RecycleViewFragment extends Fragment {
         PokemonAdapter adapter = new PokemonAdapter(poke);
         view2.setAdapter(adapter);
 
-        return view2;
+        return view;
     }
 }
