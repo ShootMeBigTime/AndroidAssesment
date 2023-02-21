@@ -3,6 +3,7 @@ package com.example.assesment;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,14 +16,13 @@ import java.util.zip.Inflater;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    static MediaPlayer mediaPlayer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingFragment()).commit();
     }
+
     public static class SettingFragment extends PreferenceFragment{
 
 
@@ -37,12 +37,6 @@ public class SettingsActivity extends AppCompatActivity {
         private void updateSummary(Preference p) {
 
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-            if(preferences.getBoolean("Music", true)){
-                mediaPlayer = MediaPlayer.create(getContext(), R.raw.music);
-                mediaPlayer.start();
-            }else{
-                onPause();
-            }
 
         }
     }

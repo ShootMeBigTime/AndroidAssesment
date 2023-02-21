@@ -2,10 +2,12 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="Options">
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="Music"
-            android:title="Background music"/>
+        android:title="Options tekst waardes">
+        <EditTextPreference
+            android:title="Naam assistent"
+            android:defaultValue="Pikachu"
+            android:key="title">
+
+        </EditTextPreference>
     </PreferenceCategory>
 </PreferenceScreen>

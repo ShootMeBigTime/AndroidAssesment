@@ -7,18 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
-public class sendPokemon extends AppCompatActivity {
+public class SendPokemon extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_pokemon);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -35,7 +37,7 @@ public class sendPokemon extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.sendPokemon:
-                intent = new Intent(this, sendPokemon.class);
+                intent = new Intent(this, SendPokemon.class);
                 startActivity(intent);
                 return true;
             case R.id.settings:
@@ -45,5 +47,15 @@ public class sendPokemon extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    public void sendMessage(View v){
+        EditText text = findViewById(R.id.editText);
+        String message = text.getText().toString();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+        sendIntent.setType("text/plain");
+
+        startActivity(sendIntent);
     }
 }

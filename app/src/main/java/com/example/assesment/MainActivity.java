@@ -13,8 +13,6 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    final MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.music);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            if(preferences.getBoolean("Music", true)) {
-                mediaPlayer.start();
-            }
     }
 
     @Override
@@ -47,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
             case R.id.sendPokemon:
-                intent = new Intent(this, sendPokemon.class);
+                intent = new Intent(this, SendPokemon.class);
                 startActivity(intent);
                 return true;
             case R.id.settings:
