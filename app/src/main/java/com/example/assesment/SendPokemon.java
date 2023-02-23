@@ -1,17 +1,24 @@
 package com.example.assesment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class SendPokemon extends AppCompatActivity {
 
+    String[] permissions = {"android.permission.SEND_SMS"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +55,29 @@ public class SendPokemon extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public void sendMessage(View v){
-        EditText text = findViewById(R.id.editText);
-        String message = text.getText().toString();
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-        sendIntent.setType("text/plain");
 
-        startActivity(sendIntent);
+    public void sendMessage(View v){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            requestPermissions(permissions, 80);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == 80){
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                EditText text = findViewById(R.id.editText);
+                String message = text.getText().toString();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+            }else{
+                Toast.makeText(this, "Access denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
