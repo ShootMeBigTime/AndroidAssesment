@@ -6,7 +6,7 @@
         <EditTextPreference
             android:title="Naam assistent"
             android:defaultValue="Pikachu"
-            android:key="title">
+            android:key="assistant">
 
         </EditTextPreference>
     </PreferenceCategory>

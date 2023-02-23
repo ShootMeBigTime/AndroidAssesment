@@ -7,9 +7,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -76,7 +78,9 @@ public class SendPokemon extends AppCompatActivity {
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }else{
-                Toast.makeText(this, "Access denied", Toast.LENGTH_SHORT).show();
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+                String msg = pref.getString("assistant", "") + ": Ow no you got denied!";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
         }
     }
