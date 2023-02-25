@@ -26,16 +26,18 @@ public class RecycleViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_recycle_view, container, false);
-        RecyclerView view2 = view.findViewById(R.id.RecyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
 
-        List<Pokemon> poke = new ArrayList<>();
+        List<Pokemon> pokemonList = new ArrayList<>();
 
-        poke.add(new Pokemon(1, "Charmander", "Fire", "Lizard goes bRRR"));
-        poke.add(new Pokemon(2, "Squirtle", "Water", "Turtle goes bRRR"));
-        poke.add(new Pokemon(3, "Balbesaur", "Grass", "Toad goes bRRR"));
+        // TODO: remove temp data
+        // TODO: fill pokemonList with API data
+        pokemonList.add(new Pokemon(1, "Charmander", "Fire", "Lizard goes bRRR"));
+        pokemonList.add(new Pokemon(2, "Squirtle", "Water", "Turtle goes bRRR"));
+        pokemonList.add(new Pokemon(3, "Balbesaur", "Grass", "Toad goes bRRR"));
 
-        PokemonAdapter adapter = new PokemonAdapter(poke);
-        view2.setAdapter(adapter);
+        PokemonAdapter pokemonAdapter = new PokemonAdapter(pokemonList);
+        recyclerView.setAdapter(pokemonAdapter);
 
         return view;
     }
