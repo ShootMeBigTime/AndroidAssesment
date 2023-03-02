@@ -9,18 +9,28 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SendPokemon extends AppCompatActivity {
 
     String[] permissions = {"android.permission.SEND_SMS"};
+    public static final int PICK_IMAGE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +39,9 @@ public class SendPokemon extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -59,9 +71,32 @@ public class SendPokemon extends AppCompatActivity {
     }
 
     public void sendMessage(View v){
-
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             requestPermissions(permissions, 80);
+        }
+    }
+    public void openGallery(View v){
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE) {
+
+            ImageView img = findViewById(R.id.imageView);
+            if(data != null)
+            {
+                Uri selectedImageUri = data.getData();
+                img.setImageURI(selectedImageUri);
+            }else{
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+                String msg = pref.getString("assistant", "") + ": Ow no! something went wrong";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

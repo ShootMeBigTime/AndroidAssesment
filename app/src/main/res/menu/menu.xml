@@ -6,7 +6,7 @@
     <item  android:id="@+id/pokedex"
         android:title="pokedex"/>
     <item  android:id="@+id/sendPokemon"
-        android:title="verstuur pokemon"/>
+        android:title="implicit intent + permissions"/>
     <item  android:id="@+id/settings"
         android:title="Instellingen"
         app:showAsAction="withText"/>
