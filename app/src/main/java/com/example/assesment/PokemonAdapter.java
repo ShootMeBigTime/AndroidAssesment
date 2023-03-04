@@ -1,5 +1,7 @@
 package com.example.assesment;
 
+import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,16 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
-    List<Pokemon> Pokemon;
-
-    PokemonAdapter(List<Pokemon> pokemons){
-
-        this.Pokemon = pokemons;
-    }
+    List<Pokemon> pokemon;
 
     @NonNull
     @Override
@@ -29,21 +28,31 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PokemonViewHolder holder, int position) {
+        Pokemon pokemon = this.pokemon.get(position);
 
-        Pokemon pokemon = Pokemon.get(position);
-
-        //holder.img.setImageResource(pokemon.id);
+//        holder.image.setImageURI(Uri.parse(pokemon.imageUrl));
+        holder.image.setImageBitmap(pokemon.image);
         holder.name.setText(pokemon.name);
-        holder.type.setText(pokemon.type);
-        holder.discription.setText(pokemon.discription);
     }
 
     @Override
     public int getItemCount() {
-        return Pokemon.size();
+        return pokemon.size();
     }
 
     public String getItem(int id){
-        return Pokemon.get(id).name;
+        return pokemon.get(id).name;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void setPokemonList(List<Pokemon> pokemonList) {
+        this.pokemon = pokemonList;
+        notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void addToPokemonList(Pokemon pokemon) {
+        this.pokemon.add(pokemon);
+        notifyDataSetChanged();
     }
 }
