@@ -99,7 +99,7 @@ public class PokeApi
                     Pokemon pokemon = null;
 
                     pokemon = Pokemon.parseJSON(response);
-                    pokemon.setImage(FetchPokemonImage(pokemon.imageUrl));
+//                    pokemon.setImage(FetchPokemonImage(pokemon.imageUrl));
 
                     adapter.addToPokemonList(pokemon);
                 }
