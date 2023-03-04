@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 public class PokeApi
 {
-    private static final int pokemonLimit = 30;
+    private static final int pokemonLimit = 40;
     private static final String urlPlaceholder = "?";
     private static final String allPokemonURL = "https://pokeapi.co/api/v2/pokemon?";
 //    private static final String allPokemonURL = "https://time.jsontest.com";
@@ -48,7 +48,7 @@ public class PokeApi
 //            adapter.setPokemonList(pokeCache.get("allPokemon"));
 //        }
 
-        this.allPokemon = new ArrayList<Pokemon>();
+        this.allPokemon = new ArrayList<>();
         FetchAllPokemon(pokemonLimit);
     }
 
