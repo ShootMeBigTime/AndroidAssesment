@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecycleViewFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -28,15 +26,15 @@ public class RecycleViewFragment extends Fragment {
         View view =  inflater.inflate(R.layout.fragment_recycle_view, container, false);
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
 
-        List<Pokemon> pokemonList = new ArrayList<>();
+        PokeApi pokeApi = new PokeApi();
+        PokemonAdapter pokemonAdapter = new PokemonAdapter();
+        pokemonAdapter.setPokemonList(new ArrayList<>());
 
-        // TODO: remove temp data
-        // TODO: fill pokemonList with API data
-        pokemonList.add(new Pokemon(1, "Charmander", "Fire", "Lizard goes bRRR"));
-        pokemonList.add(new Pokemon(2, "Squirtle", "Water", "Turtle goes bRRR"));
-        pokemonList.add(new Pokemon(3, "Balbesaur", "Grass", "Toad goes bRRR"));
+        pokeApi.SetAllPokemon(getContext(), pokemonAdapter);
 
-        PokemonAdapter pokemonAdapter = new PokemonAdapter(pokemonList);
+//        pokemonAdapter.setPoke(pokemonList);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(pokemonAdapter);
 
         return view;

@@ -3,18 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/detailFragment"
-        android:name="com.example.assesment.DetailFragment"
-        android:layout_width="0px"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/overviewFragment"
         android:name="com.example.assesment.RecycleViewFragment"
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1" />
-
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/container"-->
+<!--        android:layout_width="0px"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/detailFragment"-->
+<!--        android:name="com.example.assesment.DetailFragment"-->
+<!--        android:layout_width="0px"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1" />-->
 
 </LinearLayout>

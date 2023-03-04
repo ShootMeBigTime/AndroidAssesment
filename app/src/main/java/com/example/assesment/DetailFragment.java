@@ -19,7 +19,6 @@ public class DetailFragment extends Fragment {
 
     ImageView imageViewPokemon;
     TextView textViewName;
-    TextView textViewDetail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,12 +29,10 @@ public class DetailFragment extends Fragment {
 
         imageViewPokemon = view.findViewById(R.id.imageViewPokemon);
         textViewName = view.findViewById(R.id.textViewName);
-        textViewDetail = view.findViewById(R.id.textViewDetail);
 
         if (getArguments() != null)
         {
             String pokemon = getArguments().getString("pokemon");
-
             setPokemon(pokemon);
         }
 
@@ -44,10 +41,8 @@ public class DetailFragment extends Fragment {
 
     public void setPokemon(String pokemon)
     {
-        // TODO: set pokemon image
-        imageViewPokemon.setImageBitmap(PokeApi.FetchImageByPokemonId(12));
-
-        // TODO: set pokemon name
-        // TODO: set pokemon detail
+//         TODO: set pokemon image
+//         TODO: set pokemon name
+//         TODO: set pokemon detail
     }
 }

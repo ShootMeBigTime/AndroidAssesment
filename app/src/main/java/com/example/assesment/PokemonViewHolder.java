@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PokemonViewHolder extends RecyclerView.ViewHolder {
 
-    //ImageView img;
+    ImageView image;
     TextView name;
-    TextView type;
-    TextView discription;
 
     public PokemonViewHolder(@NonNull View itemView) {
         super(itemView);
-
+        image = itemView.findViewById(R.id.imageView);
+        name = itemView.findViewById(R.id.textViewName);
     }
 }
