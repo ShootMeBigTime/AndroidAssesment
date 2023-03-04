@@ -28,6 +28,7 @@ public class PokeApi
     private static final int pokemonLimit = 40;
     private static final String urlPlaceholder = "?";
     private static final String allPokemonURL = "https://pokeapi.co/api/v2/pokemon?";
+    private static final String pokemonURL = "https://pokeapi.co/api/v2/pokemon/?";
 //    private static final String allPokemonURL = "https://time.jsontest.com";
 
     private ArrayList<Pokemon> allPokemon;
@@ -39,23 +40,28 @@ public class PokeApi
     {
         this.adapter = adapter;
         this.context = context;
-//        if (sharedPreferences = requireActivity().getSharedPreferences(("AllPokemon", context.MODE_PRIVATE)))
-//        {
-//            FetchAllPokemon(pokemonLimit);
-//        }
-//        else
-//        {
-//            adapter.setPokemonList(pokeCache.get("allPokemon"));
-//        }
 
         this.allPokemon = new ArrayList<>();
         FetchAllPokemon(pokemonLimit);
     }
 
+    public void SetPokemon(Context context, PokemonAdapter adapter, int id)
+    {
+        this.adapter = adapter;
+        this.context = context;
+
+        this.allPokemon = new ArrayList<>();
+        FetchPokemonByUrl(buildPokemonURL(id));
+    }
+
     private static String buildAllPokemonURL(int limit)
     {
-//        return allPokemonURL;
         return allPokemonURL.replace(urlPlaceholder, "?limit=" + limit);
+    }
+
+    private static String buildPokemonURL(int id)
+    {
+        return pokemonURL.replace(urlPlaceholder, String.valueOf(id));
     }
 
     private void FetchAllPokemon(int limit)

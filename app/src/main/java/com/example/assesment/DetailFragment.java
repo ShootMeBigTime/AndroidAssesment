@@ -43,6 +43,7 @@ public class DetailFragment extends Fragment {
     {
 //         TODO: set pokemon image
 //         TODO: set pokemon name
+
 //         TODO: set pokemon detail
     }
 }
