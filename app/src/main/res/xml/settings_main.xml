@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Options tekst waardes">
+        <EditTextPreference
+            android:title="Naam assistent"
+            android:defaultValue="Pikachu"
+            android:key="assistant">
+
+        </EditTextPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
