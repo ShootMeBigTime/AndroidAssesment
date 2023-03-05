@@ -11,10 +11,12 @@ public class PokemonViewHolder extends RecyclerView.ViewHolder {
 
     ImageView image;
     TextView name;
+    TextView id;
 
     public PokemonViewHolder(@NonNull View itemView) {
         super(itemView);
         image = itemView.findViewById(R.id.imageView);
         name = itemView.findViewById(R.id.textViewName);
+        id = itemView.findViewById(R.id.textViewId);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.assesment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,18 +31,21 @@ public class DetailFragment extends Fragment {
 
         if (getArguments() != null)
         {
-            String pokemon = getArguments().getString("pokemon");
-            setPokemon(pokemon);
+            int pokemonId = getArguments().getInt("id");
+
+            // TODO: get pokemon data
+            // TODO: calls on setPokemon
+//            setPokemon(pokemonId);
         }
 
         return view;
     }
 
-    public void setPokemon(String pokemon)
+    public void setPokemon(Pokemon pokemon)
     {
+        imageViewPokemon.setImageBitmap(pokemon.image);
 //         TODO: set pokemon image
 //         TODO: set pokemon name
-
 //         TODO: set pokemon detail
     }
 }
