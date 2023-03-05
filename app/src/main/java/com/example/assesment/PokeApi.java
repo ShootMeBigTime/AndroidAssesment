@@ -17,7 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -42,7 +41,7 @@ public class PokeApi
         this.context = context;
 
         this.allPokemon = new ArrayList<>();
-        FetchAllPokemon(pokemonLimit);
+        FetchAllPokemon();
     }
 
     public void SetPokemon(Context context, PokemonAdapter adapter, int id)
@@ -54,9 +53,9 @@ public class PokeApi
         FetchPokemonByUrl(buildPokemonURL(id));
     }
 
-    private static String buildAllPokemonURL(int limit)
+    private static String buildAllPokemonURL()
     {
-        return allPokemonURL.replace(urlPlaceholder, "?limit=" + limit);
+        return allPokemonURL.replace(urlPlaceholder, "?limit=" + PokeApi.pokemonLimit);
     }
 
     private static String buildPokemonURL(int id)
@@ -64,30 +63,21 @@ public class PokeApi
         return pokemonURL.replace(urlPlaceholder, String.valueOf(id));
     }
 
-    private void FetchAllPokemon(int limit)
+    private void FetchAllPokemon()
     {
         try {
-            String url = buildAllPokemonURL(limit);
+            String url = buildAllPokemonURL();
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    try {
-                        JSONArray jsonArray = response.getJSONArray("results");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            FetchPokemonByUrl(jsonArray.getJSONObject(i).getString("url"));
-                        }
-                        //TODO: cache data
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+                try {
+                    JSONArray jsonArray = response.getJSONArray("results");
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        FetchPokemonByUrl(jsonArray.getJSONObject(i).getString("url"));
                     }
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
                 }
-                }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("DataFetch", "Invalid URL");
-                }
-            });
+            }, error -> Log.e("DataFetch", "Invalid URL"));
             RequestQueue queue = Volley.newRequestQueue(context);
             queue.add(jsonObjectRequest);
 
@@ -96,25 +86,17 @@ public class PokeApi
         }
     }
 
-    private Pokemon FetchPokemonByUrl(String url)
+    private void FetchPokemonByUrl(String url)
     {
         try {
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    Pokemon pokemon = null;
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, response -> {
+                Pokemon pokemon;
 
-                    pokemon = Pokemon.parseJSON(response);
+                pokemon = Pokemon.parseJSON(response);
 //                    pokemon.setImage(FetchPokemonImage(pokemon.imageUrl));
 
-                    adapter.addToPokemonList(pokemon);
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e("DataFetch", "Invalid URL");
-                }
-            });
+                adapter.addToPokemonList(pokemon);
+            }, error -> Log.e("DataFetch", "Invalid URL"));
             RequestQueue queue = Volley.newRequestQueue(context);
             queue.add(jsonObjectRequest);
 
@@ -122,7 +104,6 @@ public class PokeApi
             throw new RuntimeException(e);
         }
 
-        return null;
     }
 
     private Bitmap FetchPokemonImage(String stringUrl)

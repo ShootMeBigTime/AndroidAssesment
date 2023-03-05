@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
@@ -27,12 +28,10 @@ public class RecycleViewFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.RecyclerView);
 
         PokeApi pokeApi = new PokeApi();
-        PokemonAdapter pokemonAdapter = new PokemonAdapter();
+        PokemonAdapter pokemonAdapter = new PokemonAdapter(this);
         pokemonAdapter.setPokemonList(new ArrayList<>());
 
         pokeApi.SetAllPokemon(getContext(), pokemonAdapter);
-
-//        pokemonAdapter.setPoke(pokemonList);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(pokemonAdapter);

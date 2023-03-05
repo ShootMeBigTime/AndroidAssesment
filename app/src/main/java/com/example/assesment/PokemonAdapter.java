@@ -1,27 +1,45 @@
 package com.example.assesment;
 
+
 import android.annotation.SuppressLint;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonViewHolder> {
 
+    interface OnClickListener {
+        void onItemSelected(String pokemon);
+    }
+
+    OnClickListener listener;
     List<Pokemon> pokemon;
+
+    public PokemonAdapter(RecycleViewFragment fragment) {
+        listener = (MainActivity)fragment.getActivity();
+    }
 
     @NonNull
     @Override
     public PokemonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.pokemon_item, parent, false);
+
+        view.setOnClickListener(view1 -> {
+            TextView textView = view1.findViewById(R.id.textViewName);
+            if (textView != null)
+            {
+                String pokemonName = textView.getText().toString();
+                listener.onItemSelected(pokemonName);
+            }
+        });
 
         return new PokemonViewHolder(view);
     }

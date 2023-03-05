@@ -1,6 +1,7 @@
 package com.example.assesment;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,4 +20,6 @@ public class PokemonViewHolder extends RecyclerView.ViewHolder {
         name = itemView.findViewById(R.id.textViewName);
         id = itemView.findViewById(R.id.textViewId);
     }
+
+
 }
