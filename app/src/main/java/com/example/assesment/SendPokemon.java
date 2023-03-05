@@ -3,19 +3,14 @@ package com.example.assesment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,13 +18,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
 public class SendPokemon extends AppCompatActivity {
 
     String[] permissions = {"android.permission.SEND_SMS"};
     public static final int PICK_IMAGE = 1;
+    public Uri selectedImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +86,7 @@ public class SendPokemon extends AppCompatActivity {
             {
                 Uri selectedImageUri = data.getData();
                 img.setImageURI(selectedImageUri);
+                selectedImage = selectedImageUri;
             }else{
                 SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
                 String msg = pref.getString("assistant", "") + ": Ow no! something went wrong";
@@ -109,6 +104,7 @@ public class SendPokemon extends AppCompatActivity {
                 String message = text.getText().toString();
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
+                if(selectedImage != null){sendIntent.putExtra(Intent.EXTRA_STREAM, selectedImage);}
                 sendIntent.putExtra(Intent.EXTRA_TEXT, message);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
