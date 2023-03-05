@@ -1,6 +1,5 @@
 package com.example.assesment;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -43,7 +42,6 @@ public class DetailFragment extends Fragment {
     {
 //         TODO: set pokemon image
 //         TODO: set pokemon name
-
 //         TODO: set pokemon detail
     }
 }
