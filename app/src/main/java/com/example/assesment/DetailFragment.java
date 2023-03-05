@@ -29,23 +29,11 @@ public class DetailFragment extends Fragment {
         imageViewPokemon = view.findViewById(R.id.imageViewPokemon);
         textViewName = view.findViewById(R.id.textViewName);
 
-        if (getArguments() != null)
-        {
-            int pokemonId = getArguments().getInt("id");
-
-            // TODO: get pokemon data
-            // TODO: calls on setPokemon
-//            setPokemon(pokemonId);
-        }
-
         return view;
     }
 
-    public void setPokemon(Pokemon pokemon)
+    public void setPokemon(String pokemon)
     {
-        imageViewPokemon.setImageBitmap(pokemon.image);
-//         TODO: set pokemon image
-//         TODO: set pokemon name
-//         TODO: set pokemon detail
+        textViewName.setText(pokemon);
     }
 }
